@@ -64,13 +64,13 @@ const galleryItems = [
   },
 ];
 
-const ref = {
+const refs = {
   galleryList: document.querySelector(".js-gallery"),
   modal: document.querySelector(".js-lightbox"),
-  biggerimg: document.querySelector(".lightbox__image"),
-  closeBtn: document.querySelector("button[data-action='close-lightbox']"),
+  biggerImg: document.querySelector(".lightbox__image"),
+  closeButton: document.querySelector("button[data-action='close-lightbox']"),
 };
-const { galleryList, modal, biggerimg, closeBtn } = ref;
+const { galleryList, modal,  biggerImg, closeButton } = refs;
 
 galleryItems.forEach((img) => {
   galleryList.insertAdjacentHTML(
@@ -91,9 +91,9 @@ galleryItems.forEach((img) => {
   );
 });
 
-function closeModalBt(modal) {
-  biggerimg.src = "";
-  modal.classList.remove("is-open");
+function closeModal(modalRoud) {
+  biggerImg.src = "";
+  modalRoud.classList.remove("is-open");
 }
 
 galleryList.addEventListener("click", (e) => {
@@ -101,23 +101,23 @@ galleryList.addEventListener("click", (e) => {
     const indexOfClikedElem = galleryItems.findIndex(
       (elem) => elem.preview === e.target.src
     );
-    biggerimg.src = galleryItems[indexOfClikedElem].original;
-    biggerimg.alt = galleryItems[indexOfClikedElem].description;
+    biggerImg.src = galleryItems[indexOfClikedElem].original;
+    biggerImg.alt = galleryItems[indexOfClikedElem].description;
     modal.classList.add("is-open");
   }
 });
 
-modal.addEventListener("click", (event) => {
+modal.addEventListener("click", (e) => {
   if (
-    event.target.nodeName === "BUTTON" &&
-    event.target.classList.contains("lightbox__button")
+    e.target.nodeName === "BUTTON" &&
+    e.target.classList.contains("lightbox__button")
   ) {
-    closeModalBt(e.currentTarget);
+    closeModal(e.currentTarget);
   } else if (
-    event.target.nodeName === "DIV" &&
-    event.target.classList.contains("lightbox__overlay")
+    e.target.nodeName === "DIV" &&
+    e.target.classList.contains("lightbox__overlay")
   ) {
-    closeModalBt(e.currentTarget);
+    closeModal(e.currentTarget);
   } else {
     return;
   }

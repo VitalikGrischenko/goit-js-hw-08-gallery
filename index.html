@@ -8,203 +8,168 @@
 
   </head>
   <body>
+    <!-- В этот список добавляй элементы галереи -->
+    <ul class="gallery js-gallery"></ul>
 
-    <ul class="gallery js-gallery">
-      <li class="gallery__item">
-      <a class="gallery__link">
-        <img class="gallery__image" src="https://cdn.pixabay.com/photo/2019/05/14/16/43/himilayan-blue-poppy-4202825__340.jpg" data-source="https://cdn.pixabay.com/photo/2010/12/13/10/13/tulips-2546_1280.jpg" alt="Hokkaido" flower="">
-      </a>
-    </li><li class="gallery__item">
-      <a class="gallery__link">
-        <img class="gallery__image" src="https://cdn.pixabay.com/photo/2019/05/14/22/05/container-4203677__340.jpg" data-source="https://cdn.pixabay.com/photo/2010/12/13/10/13/tulips-2546_1280.jpg" alt="Container" haulage="" freight="">
-      </a>
-    </li><li class="gallery__item">
-      <a class="gallery__link">
-        <img class="gallery__image" src="https://cdn.pixabay.com/photo/2019/05/16/09/47/beach-4206785__340.jpg" data-source="https://cdn.pixabay.com/photo/2010/12/13/10/13/tulips-2546_1280.jpg" alt="Aerial" beach="" view="">
-      </a>
-    </li><li class="gallery__item">
-      <a class="gallery__link">
-        <img class="gallery__image" src="https://cdn.pixabay.com/photo/2016/11/18/16/19/flowers-1835619__340.jpg" data-source="https://cdn.pixabay.com/photo/2010/12/13/10/13/tulips-2546_1280.jpg" alt="Flower" blooms="">
-      </a>
-    </li><li class="gallery__item">
-      <a class="gallery__link">
-        <img class="gallery__image" src="https://cdn.pixabay.com/photo/2018/09/13/10/36/mountains-3674334__340.jpg" data-source="https://cdn.pixabay.com/photo/2010/12/13/10/13/tulips-2546_1280.jpg" alt="Alpine" mountains="">
-      </a>
-    </li><li class="gallery__item">
-      <a class="gallery__link">
-        <img class="gallery__image" src="https://cdn.pixabay.com/photo/2019/05/16/23/04/landscape-4208571__340.jpg" data-source="https://cdn.pixabay.com/photo/2010/12/13/10/13/tulips-2546_1280.jpg" alt="Mountain" lake="" sailing="">
-      </a>
-    </li><li class="gallery__item">
-      <a class="gallery__link">
-        <img class="gallery__image" src="https://cdn.pixabay.com/photo/2019/05/17/09/27/the-alps-4209272__340.jpg" data-source="https://cdn.pixabay.com/photo/2010/12/13/10/13/tulips-2546_1280.jpg" alt="Alpine" spring="" meadows="">
-      </a>
-    </li><li class="gallery__item">
-      <a class="gallery__link">
-        <img class="gallery__image" src="https://cdn.pixabay.com/photo/2019/05/16/21/10/landscape-4208255__340.jpg" data-source="https://cdn.pixabay.com/photo/2010/12/13/10/13/tulips-2546_1280.jpg" alt="Nature" landscape="">
-      </a>
-    </li><li class="gallery__item">
-      <a class="gallery__link">
-        <img class="gallery__image" src="https://cdn.pixabay.com/photo/2019/05/17/04/35/lighthouse-4208843__340.jpg" data-source="https://cdn.pixabay.com/photo/2010/12/13/10/13/tulips-2546_1280.jpg" alt="Lighthouse" coast="" sea="">
-      </a>
-    </li>
-  </ul>
-  <div class="lightbox js-lightbox">
-    <div class="lightbox__overlay"></div>
-    <div class="lightbox__content">
-      <img class="lightbox__image" src="" alt="" />
+    <!--
+      Модальное окно для полноразмерного изображения
+      Для того чтобы открыть, необходимо добавить на div.lightbox CSS-класс is-open
+    -->
+    <div class="lightbox js-lightbox">
+      <div class="lightbox__overlay"></div>
+      <div class="lightbox__content">
+        <img class="lightbox__image" src="" alt="" />
+      </div>
+      <button
+        type="button"
+        class="lightbox__button"
+        data-action="close-lightbox"
+      ></button>
     </div>
-    <button
-      type="button"
-      class="lightbox__button"
-      data-action="close-lightbox"
-    ></button>
-  </div>
+    <style>
+      :root {
+        --timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        --animation-duration: 250ms;
+      }
 
+      html {
+        box-sizing: border-box;
+      }
 
-      <style>
-        :root {
-          --timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-          --animation-duration: 250ms;
-        }
-  
-        html {
-          box-sizing: border-box;
-        }
-  
-        *,
-        *::before,
-        *::after {
-          box-sizing: inherit;
-        }
-  
-        body {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          min-height: 100vh;
-          margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-            Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-          background-color: #fff;
-          color: #212121;
-        }
-  
-        .gallery {
-          display: grid;
-          width: 1200px;
-          grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-          grid-auto-rows: 240px;
-          grid-gap: 12px;
-          padding: 0;
-          list-style: none;
-          margin-left: auto;
+      *,
+      *::before,
+      *::after {
+        box-sizing: inherit;
+      }
 
-        }
-  
-        .gallery__item {
-          position: relative;
-          box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
-            0px 1px 1px 0px rgba(0, 0, 0, 0.14),
-            0px 2px 1px -1px rgba(0, 0, 0, 0.12);
-        }
-  
-        .gallery__image:hover {
-          transform: scale(1.03);
-        }
-  
-        .gallery__image {
-          height: 100%;
-          width: 100%;
-          object-fit: cover;
-          transition: transform var(--animation-duration) var(--timing-function);
-        }
-  
-        .gallery__link {
-          display: block;
-          text-decoration: none;
-          height: 100%;
-        }
-  
-        .gallery__link:hover {
-          cursor: zoom-in;
-        }
-  
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+        background-color: #fff;
+        color: #212121;
+      }
 
-        .lightbox {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100vw;
-          height: 100vh;
-          opacity: 0;
-          pointer-events: none;
-          transition: opacity var(--animation-duration) var(--timing-function);
-        }
-  
-        .lightbox.is-open {
-          opacity: 1;
-          pointer-events: initial;
-        }
-  
-        .lightbox__overlay {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100vw;
-          height: 100vh;
-          background-color: rgba(0, 0, 0, 0.8);
-        }
-  
-        .lightbox__content {
-          transform: scale(0.95);
-          transition: transform var(--animation-duration) var(--timing-function);
-        }
-  
-        .lightbox.is-open .lightbox__content {
-          transform: scale(1);
-        }
-  
-        .lightbox__image {
-          display: block;
-          width: auto;
-          height: auto;
-          max-height: 100vh;
-          max-width: 100vw;
-        }
-  
-        .lightbox__button {
-          position: absolute;
-          top: 40px;
-          right: 40px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 48px;
-          height: 48px;
-          padding: 0;
-          margin: 0;
-          border: none;
-          border-radius: 50%;
-          background-color: #fff;
+      .gallery {
+        display: grid;
+        width: 1200px;
+        grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+        grid-auto-rows: 240px;
+        grid-gap: 12px;
+        padding: 0;
+        list-style: none;
+        margin-left: auto;
+        margin-right: auto;
+      }
 
-          cursor: pointer;
-          transition: background-color var(--animation-duration)
-            var(--timing-function);
-          outline: none;
-          background-image: url("../imgs/closesvg.svg");
-          background-position: center;
-          background-size: 60%;
-          background-repeat: no-repeat;
-        }
-  
-        .lightbox__button:hover,
-        .lightbox__button:focus {
-          background-color: rgba(225, 225, 225, 0.8);
-        }
-      </style>
+      .gallery__item {
+        position: relative;
+        box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
+          0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+          0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+      }
+
+      .gallery__image:hover {
+        transform: scale(1.03);
+      }
+
+      .gallery__image {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        transition: transform var(--animation-duration) var(--timing-function);
+      }
+
+      .gallery__link {
+        display: block;
+        text-decoration: none;
+        height: 100%;
+      }
+
+      .gallery__link:hover {
+        cursor: zoom-in;
+      }
+
+      /* Lightbox */
+      .lightbox {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity var(--animation-duration) var(--timing-function);
+      }
+
+      .lightbox.is-open {
+        opacity: 1;
+        pointer-events: initial;
+      }
+
+      .lightbox__overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.8);
+      }
+
+      .lightbox__content {
+        transform: scale(0.95);
+        transition: transform var(--animation-duration) var(--timing-function);
+      }
+
+      .lightbox.is-open .lightbox__content {
+        transform: scale(1);
+      }
+
+      .lightbox__image {
+        display: block;
+        width: auto;
+        height: auto;
+        max-height: 100vh;
+        max-width: 100vw;
+      }
+
+      .lightbox__button {
+        position: absolute;
+        top: 40px;
+        right: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+        padding: 0;
+        margin: 0;
+        border: none;
+        border-radius: 50%;
+        background-color: #fff;
+        /* color: #fff; */
+        cursor: pointer;
+        transition: background-color var(--animation-duration)
+          var(--timing-function);
+        outline: none;
+        background-image: url("../imgs/closesvg.svg");
+        background-position: center;
+        background-size: 60%;
+        background-repeat: no-repeat;
+      }
+
+      .lightbox__button:hover,
+      .lightbox__button:focus {
+        background-color: rgba(225, 225, 225, 0.8);
+      }
+    </style>
 
     <script src="./js/1.js" type="module"></script>
   </body>
